@@ -1,5 +1,6 @@
 import { async } from "@firebase/util";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { ErrorSharp } from "@mui/icons-material";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
 
@@ -19,7 +20,7 @@ export const signInWithGoogle = async() => {
         return {
             ok: true,
             // Información del usuario
-            displayName, email, photoURL, uid
+            displayName, email, photoURL, uid, displayName
         };
 
     } catch (error) {
@@ -33,5 +34,22 @@ export const signInWithGoogle = async() => {
             ok: false,
             errorMessage,
         }
+    }
+}
+
+export const registerUserWithEmailPassword = async({ email, password, displayName }) => {
+
+    try {
+
+        const result = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
+        const { uid, photoURL } = result.user;
+        await updateProfile( FirebaseAuth.currentUser, { displayName } );
+        return {
+            ok: true,
+            uid, photoURL, email
+        }
+
+    } catch (error) {
+        return {ok: false, errorMessage: error.message}
     }
 }
