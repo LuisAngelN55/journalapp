@@ -17,7 +17,6 @@ const formValidations = {
   email: [ ( value ) => value.includes('@'), 'El correo debe de tener una @.' ],
   password: [ ( value ) => value.length >= 6, 'El password debe tener más de 6 caracteres.' ],
   displayName: [ ( value ) => value.length >= 1, 'El nombre es obligatorio.' ],
-  
 }
 
 export const RegisterPage = () => {
@@ -44,7 +43,9 @@ export const RegisterPage = () => {
   return (
     <AuthLayout title="Crear Cuenta">
 
-        <form onSubmit={ onSubmit }>
+        <form 
+          className="animate__animated animate__fadeIn animate__faster"
+          onSubmit={ onSubmit }>
 
           <Grid container>
 
