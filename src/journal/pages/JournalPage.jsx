@@ -25,11 +25,6 @@ export const JournalPage = () => {
           ? <Noteview /> 
           : <NothingSelectedView />
       }
-        
-      
-      
-      <NothingSelectedView />
-      {/* <Noteview /> */}
 
       <IconButton
       onClick={ onClickNewNote }
